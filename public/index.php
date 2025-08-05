@@ -42,7 +42,7 @@ try {
             <div class="col-md-6">
                 <h1 class="display-4 fw-bold mb-4">اكتشف منتجات العائلات المنتجة</h1>
                 <p class="lead mb-4">منتجات يدوية بجودة عالية من صنع أيدي سعودية</p>
-                <a href="public/products.php" class="btn btn-primary btn-lg px-4">تصفح المنتجات</a>
+                <a href="products.php" class="btn btn-primary btn-lg px-4">تصفح المنتجات</a>
             </div>
             <div class="col-md-6">
                 <img src="/assets/images/hero-image.jpg" alt="منتجات العائلات المنتجة" class="img-fluid rounded shadow">
@@ -56,7 +56,7 @@ try {
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">أحدث المنتجات</h2>
-            <a href="public/products.php" class="btn btn-outline-primary">عرض الكل</a>
+            <a href="products.php" class="btn btn-outline-primary">عرض الكل</a>
         </div>
         
         <div class="row g-4">
@@ -76,7 +76,7 @@ try {
                         </p>
                     </div>
                     <div class="card-footer bg-white">
-                        <a href="public/product_details.php?id=<?= $product['id'] ?>" 
+                        <a href="product_details.php?id=<?= $product['id'] ?>" 
                            class="btn btn-sm btn-primary">التفاصيل</a>
                         <button class="btn btn-sm btn-outline-secondary">
                             <i class="far fa-heart"></i>
@@ -111,7 +111,7 @@ try {
                         </span>
                     </div>
                     <div class="card-footer bg-white">
-                        <a href="public/products.php?family=<?= $family['id'] ?>" 
+                        <a href="products.php?family=<?= $family['id'] ?>" 
                            class="btn btn-sm btn-outline-primary">عرض المنتجات</a>
                     </div>
                 </div>

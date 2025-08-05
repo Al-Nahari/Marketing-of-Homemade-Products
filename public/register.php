@@ -34,7 +34,7 @@ include '../includes/header.php';
                         </div>
                     <?php endif; ?>
 
-                    <form action="/actions/register_action.php" method="post">
+                    <form action="/ene/actions/register_action.php" method="post">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="full_name" class="form-label">الاسم الكامل</label>
@@ -79,7 +79,7 @@ include '../includes/header.php';
 
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="agree_terms" name="agree_terms" required>
-                            <label class="form-check-label" for="agree_terms">أوافق على <a href="public/terms.php" class="text-decoration-none">الشروط والأحكام</a></label>
+                            <label class="form-check-label" for="agree_terms">أوافق على <a href="/ene/public/terms.php" class="text-decoration-none">الشروط والأحكام</a></label>
                         </div>
 
                         <div class="d-grid gap-2">
@@ -90,7 +90,7 @@ include '../includes/header.php';
                     <hr class="my-4">
 
                     <div class="text-center">
-                        <p>لديك حساب بالفعل؟ <a href="public/login.php" class="text-primary">سجل الدخول الآن</a></p>
+                        <p>لديك حساب بالفعل؟ <a href="/ene/public/login.php" class="text-primary">سجل الدخول الآن</a></p>
                     </div>
                 </div>
             </div>

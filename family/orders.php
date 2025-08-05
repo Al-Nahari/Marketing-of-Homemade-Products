@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
 if (!isFamilyLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
@@ -100,7 +100,7 @@ include '../includes/header.php';
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <form action="/actions/update_order_status.php" method="post">
+                                                <form action="/ene/actions/update_order_status.php" method="post">
                                                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                                     <button type="submit" name="status" value="processing" 
                                                             class="dropdown-item">قيد المعالجة</button>

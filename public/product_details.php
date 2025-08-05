@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/db.php';
 
 // التحقق من وجود معرف المنتج
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header('Location: /public/products.php');
+    header('Location: /ene/public/products.php');
     exit();
 }
 
@@ -24,7 +24,7 @@ try {
     $product = $product_stmt->fetch();
 
     if (!$product) {
-        header('Location: /public/products.php?error=product_not_found');
+        header('Location: /ene/public/products.php?error=product_not_found');
         exit();
     }
 
@@ -41,7 +41,7 @@ try {
 
 } catch (PDOException $e) {
     error_log("Product details error: " . $e->getMessage());
-    header('Location: /public/products.php?error=server_error');
+    header('Location: /ene/public/products.php?error=server_error');
     exit();
 }
 
@@ -100,7 +100,7 @@ include '../includes/header.php';
                                 <p class="text-muted small mb-1">
                                     <i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($product['family_city']) ?>
                                 </p>
-                                <a href="public/products.php?family=<?= $product['family_id'] ?>" 
+                                <a href="/ene/public/products.php?family=<?= $product['family_id'] ?>" 
                                    class="btn btn-sm btn-outline-primary">عرض جميع منتجات العائلة</a>
                             </div>
                         </div>
@@ -108,7 +108,7 @@ include '../includes/header.php';
                 </div>
                 
                 <div class="product-actions mb-4">
-                    <form action="/actions/add_to_cart.php" method="post">
+                    <form action="/ene/actions/add_to_cart.php" method="post">
                         <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                         <div class="row g-2 align-items-center mb-3">
                             <div class="col-auto">
@@ -193,7 +193,7 @@ include '../includes/header.php';
                             </p>
                         </div>
                         <div class="card-footer bg-white">
-                            <a href="public/product_details.php?id=<?= $related['id'] ?>" 
+                            <a href="/ene/public/product_details.php?id=<?= $related['id'] ?>" 
                                class="btn btn-sm btn-primary">التفاصيل</a>
                             <button class="btn btn-sm btn-outline-secondary">
                                 <i class="far fa-heart"></i>

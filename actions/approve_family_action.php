@@ -3,12 +3,12 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
 if (!isAdminLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /admin/approve_families.php?error=invalid_request');
+    header('Location: /ene/admin/approve_families.php?error=invalid_request');
     exit();
 }
 
@@ -16,7 +16,7 @@ $family_id = filter_input(INPUT_POST, 'family_id', FILTER_SANITIZE_NUMBER_INT);
 $action = $_POST['action']; // 'approve' أو 'reject'
 
 if (empty($family_id) || !in_array($action, ['approve', 'reject'])) {
-    header('Location: /admin/approve_families.php?error=invalid_data');
+    header('Location: /ene/admin/approve_families.php?error=invalid_data');
     exit();
 }
 
@@ -27,7 +27,7 @@ try {
     $family = $stmt->fetch();
 
     if (!$family) {
-        header('Location: /admin/approve_families.php?error=family_not_found');
+        header('Location: /ene/admin/approve_families.php?error=family_not_found');
         exit();
     }
 
@@ -53,12 +53,12 @@ try {
     $action_text = ($action === 'approve') ? 'موافقة على' : 'رفض';
     logActivity($_SESSION['user_id'], "$action_text عائلة منتجة: {$family['full_name']}");
 
-    header('Location: /admin/approve_families.php?success=action_completed');
+    header('Location: /ene/admin/approve_families.php?success=action_completed');
     exit();
 
 } catch (PDOException $e) {
     error_log("Approve family error: " . $e->getMessage());
-    header('Location: /admin/approve_families.php?error=server_error');
+    header('Location: /ene/admin/approve_families.php?error=server_error');
     exit();
 }
 ?>

@@ -1,9 +1,12 @@
 <?php
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
+function isAdminLoggedIn() {
+    return isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin';
+}
 
 if (!isAdminLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
@@ -81,7 +84,7 @@ include '../includes/header.php';
 <script>
 function confirmDelete(productId) {
     if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
-        window.location.href = 'actions/delete_product_action.php?id=' + productId;
+        window.location.href = '/ene/actions/delete_product_action.php?id=' + productId;
     }
 }
 </script>

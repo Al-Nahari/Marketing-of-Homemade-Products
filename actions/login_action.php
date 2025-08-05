@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /public/login.php?error=invalid_request');
+    header('Location: /ene/public/login.php?error=invalid_request');
     exit();
 }
 
@@ -13,7 +13,7 @@ $password = $_POST['password'];
 
 // التحقق من البيانات المدخلة
 if (empty($email) || empty($password)) {
-    header('Location: /public/login.php?error=empty_fields');
+    header('Location: /ene/public/login.php?error=empty_fields');
     exit();
 }
 
@@ -23,13 +23,13 @@ try {
     $user = $stmt->fetch();
 
     if (!$user || !password_verify($password, $user['password'])) {
-        header('Location: /public/login.php?error=invalid_credentials');
+        header('Location: /ene/public/login.php?error=invalid_credentials');
         exit();
     }
 
     // التحقق من حالة الحساب
     if ($user['status'] !== 'active') {
-        header('Location: /public/login.php?error=account_not_active');
+        header('Location: /ene/public/login.php?error=account_not_active');
         exit();
     }
 
@@ -44,19 +44,19 @@ try {
     // التوجيه حسب نوع المستخدم
     switch ($user['user_type']) {
         case 'admin':
-            header('Location: /admin/dashboard.php');
+            header('Location: /ene/admin/dashboard.php');
             break;
         case 'family':
-            header('Location: /family/dashboard.php');
+            header('Location: /ene/family/dashboard.php');
             break;
         default:
-            header('Location: /user/dashboard.php');
+            header('Location: /ene/user/dashboard.php');
     }
     exit();
 
 } catch (PDOException $e) {
     error_log("Login error: " . $e->getMessage());
-    header('Location: /public/login.php?error=server_error');
+    header('Location: /ene/public/login.php?error=server_error');
     exit();
 }
 ?>

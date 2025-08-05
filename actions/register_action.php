@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /public/register.php?error=invalid_request');
+    header('Location: /ene/public/register.php?error=invalid_request');
     exit();
 }
 
@@ -24,7 +24,7 @@ if (strlen($password) < 8) $errors[] = 'short_password';
 if ($password !== $confirm_password) $errors[] = 'password_mismatch';
 
 if (!empty($errors)) {
-    header('Location: /public/register.php?error=' . implode(',', $errors));
+    header('Location: /ene/public/register.php?error=' . implode(',', $errors));
     exit();
 }
 
@@ -34,7 +34,7 @@ try {
     $stmt->execute([$email]);
     
     if ($stmt->fetch()) {
-        header('Location: /public/register.php?error=email_exists');
+        header('Location: /ene/public/register.php?error=email_exists');
         exit();
     }
 
@@ -72,12 +72,12 @@ try {
         }
     }
 
-    header('Location: /public/login.php?success=registration_complete');
+    header('Location: /ene/public/login.php?success=registration_complete');
     exit();
 
 } catch (PDOException $e) {
     error_log("Registration error: " . $e->getMessage());
-    header('Location: /public/register.php?error=server_error');
+    header('Location: /ene/public/register.php?error=server_error');
     exit();
 }
 ?>

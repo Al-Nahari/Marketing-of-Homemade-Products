@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
 if (!isAdminLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 

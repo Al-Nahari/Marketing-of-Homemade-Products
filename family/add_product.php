@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
 if (!isFamilyLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
@@ -49,7 +49,7 @@ include '../includes/header.php';
                         </div>
                     <?php endif; ?>
 
-                    <form action="/actions/add_product_action.php" method="post" enctype="multipart/form-data">
+                    <form action="/ene/actions/add_product_action.php" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">اسم المنتج</label>
                             <input type="text" class="form-control" id="name" name="name" required>

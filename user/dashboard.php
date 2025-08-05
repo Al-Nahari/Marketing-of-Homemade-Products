@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
 if (!isUserLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
@@ -107,7 +107,7 @@ include '../includes/header.php';
                         <a href="user/orders.php" class="btn btn-outline-success">عرض جميع الطلبات</a>
                     <?php else: ?>
                         <div class="alert alert-info">لا توجد طلبات سابقة</div>
-                        <a href="public/products.php" class="btn btn-success">تصفح المنتجات</a>
+                        <a href="/ene/public/products.php" class="btn btn-success">تصفح المنتجات</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -133,7 +133,7 @@ include '../includes/header.php';
                                     </p>
                                 </div>
                                 <div class="card-footer bg-white">
-                                    <a href="public/product_details.php?id=<?= $product['id'] ?>" 
+                                    <a href="/ene/public/product_details.php?id=<?= $product['id'] ?>" 
                                        class="btn btn-sm btn-primary">التفاصيل</a>
                                     <button class="btn btn-sm btn-outline-secondary">
                                         <i class="far fa-heart"></i>

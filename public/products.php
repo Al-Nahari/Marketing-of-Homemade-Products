@@ -1,65 +1,60 @@
 <?php
-// في بداية الملف - تأكد من استدعاء ملف الاتصال أولاً
 require_once __DIR__ . '/../config/db.php';
 
-// الحصول على اتصال PDO
-$pdo = Database::getInstance();
+// معالجة معاملات البحث والتصفية
+$search = $_GET['search'] ?? '';
+$category_id = $_GET['category'] ?? '';
+$family_id = $_GET['family'] ?? '';
+$min_price = $_GET['min_price'] ?? '';
+$max_price = $_GET['max_price'] ?? '';
 
-// الآن يمكنك تنفيذ الاستعلامات بأمان
+// بناء استعلام SQL مع عوامل التصفية
+$query = "
+    SELECT p.*, u.full_name as family_name, c.name as category_name
+    FROM products p
+    JOIN users u ON p.family_id = u.id
+    JOIN categories c ON p.category_id = c.id
+    WHERE p.status = 'available'
+";
+
+$params = [];
+$conditions = [];
+
+if (!empty($search)) {
+    $conditions[] = "(p.name LIKE ? OR p.description LIKE ?)";
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+}
+
+if (!empty($category_id)) {
+    $conditions[] = "p.category_id = ?";
+    $params[] = $category_id;
+}
+
+if (!empty($family_id)) {
+    $conditions[] = "p.family_id = ?";
+    $params[] = $family_id;
+}
+
+if (!empty($min_price)) {
+    $conditions[] = "p.price >= ?";
+    $params[] = $min_price;
+}
+
+if (!empty($max_price)) {
+    $conditions[] = "p.price <= ?";
+    $params[] = $max_price;
+}
+
+if (!empty($conditions)) {
+    $query .= " AND " . implode(" AND ", $conditions);
+}
+
+// إضافة الترتيب
+$query .= " ORDER BY p.created_at DESC";
+
+// جلب التصنيفات لعرضها في الفلتر
 try {
-    // معالجة معاملات البحث والتصفية
-    $search = $_GET['search'] ?? '';
-    $category_id = $_GET['category'] ?? '';
-    $family_id = $_GET['family'] ?? '';
-    $min_price = $_GET['min_price'] ?? '';
-    $max_price = $_GET['max_price'] ?? '';
-
-    // بناء استعلام SQL مع عوامل التصفية
-    $query = "
-        SELECT p.*, u.full_name as family_name, c.name as category_name
-        FROM products p
-        JOIN users u ON p.family_id = u.id
-        JOIN categories c ON p.category_id = c.id
-        WHERE p.status = 'available'
-    ";
-
-    $params = [];
-    $conditions = [];
-
-    if (!empty($search)) {
-        $conditions[] = "(p.name LIKE ? OR p.description LIKE ?)";
-        $params[] = "%$search%";
-        $params[] = "%$search%";
-    }
-
-    if (!empty($category_id)) {
-        $conditions[] = "p.category_id = ?";
-        $params[] = $category_id;
-    }
-
-    if (!empty($family_id)) {
-        $conditions[] = "p.family_id = ?";
-        $params[] = $family_id;
-    }
-
-    if (!empty($min_price)) {
-        $conditions[] = "p.price >= ?";
-        $params[] = $min_price;
-    }
-
-    if (!empty($max_price)) {
-        $conditions[] = "p.price <= ?";
-        $params[] = $max_price;
-    }
-
-    if (!empty($conditions)) {
-        $query .= " AND " . implode(" AND ", $conditions);
-    }
-
-    // إضافة الترتيب
-    $query .= " ORDER BY p.created_at DESC";
-
-    // جلب التصنيفات لعرضها في الفلتر
     $categories_stmt = $pdo->query("SELECT * FROM categories ORDER BY name");
     $categories = $categories_stmt->fetchAll();
 
@@ -74,8 +69,9 @@ try {
 }
 
 $page_title = "تصفح المنتجات";
-include __DIR__ . '/../includes/header.php';
+include '../includes/header.php';
 ?>
+
 <div class="container py-5">
     <div class="row">
         <!-- جانب الفلترة -->
@@ -85,7 +81,7 @@ include __DIR__ . '/../includes/header.php';
                     <h5 class="mb-0">تصفية المنتجات</h5>
                 </div>
                 <div class="card-body">
-                    <form method="get" action="/public/products.php">
+                    <form method="get" action="/ene/public/products.php">
                         <div class="mb-3">
                             <label for="search" class="form-label">بحث</label>
                             <input type="text" class="form-control" id="search" name="search" 
@@ -120,7 +116,7 @@ include __DIR__ . '/../includes/header.php';
                         </div>
                         
                         <button type="submit" class="btn btn-primary w-100">تطبيق الفلتر</button>
-                        <a href="public/products.php" class="btn btn-outline-secondary w-100 mt-2">إعادة تعيين</a>
+                        <a href="/ene/public/products.php" class="btn btn-outline-secondary w-100 mt-2">إعادة تعيين</a>
                     </form>
                 </div>
             </div>
@@ -163,7 +159,7 @@ include __DIR__ . '/../includes/header.php';
                                 </p>
                             </div>
                             <div class="card-footer bg-white">
-                                <a href="public/product_details.php?id=<?= $product['id'] ?>" 
+                                <a href="product_details.php?id=<?= $product['id'] ?>" 
                                    class="btn btn-sm btn-primary">التفاصيل</a>
                                 <button class="btn btn-sm btn-outline-secondary">
                                     <i class="far fa-heart"></i>

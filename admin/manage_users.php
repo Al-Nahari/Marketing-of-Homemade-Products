@@ -1,9 +1,12 @@
 <?php
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
+function isAdminLoggedIn() {
+    return isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin';
+}
 
 if (!isAdminLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
@@ -66,9 +69,9 @@ include '../includes/header.php';
                             <td>
                                 <div class="btn-group">
                                     <?php if ($user['status'] === 'active'): ?>
-                                    <a href="actions/block_user_action.php?id=<?= $user['id'] ?>" class="btn btn-warning btn-sm">حظر</a>
+                                    <a href="/ene/actions/block_user_action.php?id=<?= $user['id'] ?>" class="btn btn-warning btn-sm">حظر</a>
                                     <?php else: ?>
-                                    <a href="actions/activate_user_action.php?id=<?= $user['id'] ?>" class="btn btn-success btn-sm">تفعيل</a>
+                                    <a href="/ene/actions/activate_user_action.php?id=<?= $user['id'] ?>" class="btn btn-success btn-sm">تفعيل</a>
                                     <?php endif; ?>
                                     <button class="btn btn-danger btn-sm" onclick="confirmDelete(<?= $user['id'] ?>)">حذف</button>
                                 </div>
@@ -85,7 +88,7 @@ include '../includes/header.php';
 <script>
 function confirmDelete(userId) {
     if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
-        window.location.href = 'actions/delete_user_action.php?id=' + userId;
+        window.location.href = '/ene/actions/delete_user_action.php?id=' + userId;
     }
 }
 </script>

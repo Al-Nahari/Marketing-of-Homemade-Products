@@ -16,6 +16,6 @@ $_SESSION = array();
 session_destroy();
 
 // توجيه المستخدم إلى الصفحة الرئيسية
-header('Location: /public/index.php');
+header('Location: /ene/public/index.php');
 exit();
 ?>

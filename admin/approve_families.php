@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
 if (!isAdminLoggedIn()) {
-    header('Location: /public/login.php');
+    header('Location: /ene/public/login.php');
     exit();
 }
 
@@ -74,7 +74,7 @@ include '../includes/header.php';
                         <td><?= htmlspecialchars($family['phone']) ?></td>
                         <td><?= date('Y/m/d', strtotime($family['created_at'])) ?></td>
                         <td>
-                            <form method="post" action="/actions/approve_family_action.php" class="d-inline">
+                            <form method="post" action="/ene/actions/approve_family_action.php" class="d-inline">
                                 <input type="hidden" name="family_id" value="<?= $family['id'] ?>">
                                 <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">موافقة</button>
                                 <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">رفض</button>

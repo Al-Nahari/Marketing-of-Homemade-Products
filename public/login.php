@@ -43,7 +43,7 @@ include '../includes/header.php';
                         </div>
                     <?php endif; ?>
 
-                    <form action="/actions/login_action.php" method="post">
+                    <form action="/ene/actions/login_action.php" method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">البريد الإلكتروني</label>
                             <input type="email" class="form-control" id="email" name="email" required>
@@ -64,8 +64,8 @@ include '../includes/header.php';
                     <hr class="my-4">
 
                     <div class="text-center">
-                        <a href="public/forgot_password.php" class="text-decoration-none">نسيت كلمة المرور؟</a>
-                        <p class="mt-3">ليس لديك حساب؟ <a href="public/register.php" class="text-primary">سجل الآن</a></p>
+                        <a href="/ene/public/forgot_password.php" class="text-decoration-none">نسيت كلمة المرور؟</a>
+                        <p class="mt-3">ليس لديك حساب؟ <a href="/ene/public/register.php" class="text-primary">سجل الآن</a></p>
                     </div>
                 </div>
             </div>
