@@ -1,0 +1,1 @@
+<?php include '../includes/header.php'; echo '<p>edit_product.php</p>'; include '../includes/footer.php'; ?>

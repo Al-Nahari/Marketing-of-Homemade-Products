@@ -1,0 +1,1 @@
+<?php include '../includes/header.php'; echo '<p>dashboard.php</p>'; include '../includes/footer.php'; ?>

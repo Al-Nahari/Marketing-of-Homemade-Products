@@ -1,0 +1,1 @@
+<?php include '../includes/header.php'; echo '<h1>مرحبا بكم في منصة منتجي</h1>'; include '../includes/footer.php'; ?>

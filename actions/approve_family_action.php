@@ -1,0 +1,1 @@
+<?php include '../includes/header.php'; echo '<p>approve_family_action.php</p>'; include '../includes/footer.php'; ?>
